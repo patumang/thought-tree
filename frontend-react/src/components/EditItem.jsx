@@ -15,7 +15,12 @@ import {
 const EditItem = ({ item, onUpdate }) => {
   const [title, setTitle] = useState(item.title);
   const [subtitle, setSubtitle] = useState(item.subtitle);
+  const [shortDescription, setShortDescription] = useState(
+    item.short_description
+  );
   const [description, setDescription] = useState(item.description);
+  const [longDescription, setLongDescription] = useState(item.long_description);
+  const [remarkNotes, setRemarkNotes] = useState(item.remark_notes);
   const [availableParents, setAvailableParents] = useState([]);
   const [selectedParents, setSelectedParents] = useState([]);
 
@@ -31,10 +36,13 @@ const EditItem = ({ item, onUpdate }) => {
     await api.put(`/items/${item.id}`, {
       title,
       subtitle,
+      short_description: shortDescription,
       description,
+      long_description: longDescription,
+      remark_notes: remarkNotes,
       parents: selectedParents.map((p) => p.id),
     });
-    onUpdate();
+    // onUpdate();
   };
 
   return (
@@ -56,11 +64,39 @@ const EditItem = ({ item, onUpdate }) => {
         margin='normal'
       />
       <TextField
+        label='Short Description'
+        value={shortDescription}
+        onChange={(e) => setShortDescription(e.target.value)}
+        variant='outlined'
+        fullWidth
+        multiline
+        margin='normal'
+      />
+      <TextField
         label='Description'
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         variant='outlined'
         fullWidth
+        multiline
+        margin='normal'
+      />
+      <TextField
+        label='Long Description'
+        value={longDescription}
+        onChange={(e) => setLongDescription(e.target.value)}
+        variant='outlined'
+        fullWidth
+        multiline
+        margin='normal'
+      />
+      <TextField
+        label='Remark Notes'
+        value={remarkNotes}
+        onChange={(e) => setRemarkNotes(e.target.value)}
+        variant='outlined'
+        fullWidth
+        multiline
         margin='normal'
       />
       <FormControl fullWidth margin='normal'>

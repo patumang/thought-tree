@@ -17,6 +17,7 @@ import {
 } from '@mui/material';
 import Item from './components/Item';
 import Tag from './components/Tag';
+import QAndA from './components/QAndA/QAndA';
 
 const Home = ({
   handleSearch,
@@ -70,14 +71,14 @@ function App() {
 
   const handleSelectItem = (item) => {
     setSelectedItem(item);
-    fetchParentAndChildData(item);
-    // navigate(`/edit-item/${item}`);
+    //fetchParentAndChildData(item);
+    navigate(`/edit-item/${item.id}`);
   };
 
   const fetchParentAndChildData = async (item) => {
-    const parentsResponse = await api.get(`/items/${item}/parents`);
-    const childrenResponse = await api.get(`/items/${item}/children`);
-    const pathsResponse = await api.get(`/items/${item}/paths`);
+    const parentsResponse = await api.get(`/items/${item.id}/parents`);
+    const childrenResponse = await api.get(`/items/${item.id}/children`);
+    const pathsResponse = await api.get(`/items/${item.id}/paths`);
 
     setParentItems(parentsResponse.data);
     setChildrenItems(childrenResponse.data);
@@ -90,7 +91,7 @@ function App() {
         <Toolbar>
           <Typography variant='h6' style={{ flexGrow: 1 }}>
             <Button color='inherit' component={Link} to='/'>
-              Item Management App
+              Thought Tree
             </Button>
           </Typography>
 
@@ -99,6 +100,9 @@ function App() {
           </Button>
           <Button color='inherit' component={Link} to='/tags'>
             Tags
+          </Button>
+          <Button color='inherit' component={Link} to='/q-and-a'>
+            Q&A
           </Button>
         </Toolbar>
       </AppBar>
@@ -129,6 +133,7 @@ function App() {
             />
           }
         />
+        <Route path='/q-and-a' element={<QAndA />} />
       </Routes>
     </Container>
   );

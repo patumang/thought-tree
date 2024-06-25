@@ -63,12 +63,15 @@ const TreeView = ({ data, onSelect }) => {
       >
         <List>
           {items.map((item) => (
-            <SortableItem
+            <ListItem
               key={item.id}
               id={item.id}
               title={item.title}
-              onClick={(item) => onSelect(item)}
-            />
+              button
+              onClick={() => onSelect(item)}
+            >
+              {item.title}
+            </ListItem>
           ))}
         </List>
       </SortableContext>
