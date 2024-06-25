@@ -40,5 +40,11 @@ exports.updateItem = async (req, res) => {
   const updatedItem = await Item.update(req.body, {
     where: { id: req.params.id },
   });
+  /* const upateItemRelationship = await ItemRelationship.findOrCreate({
+    where: {
+      parent_item_id: req.params.id,
+      child_item_id: req.body.parents[0],
+    },
+  }); */
   res.json(updatedItem);
 };

@@ -21,6 +21,14 @@ const ItemTag = sequelize.define(
         key: 'id',
       },
     },
+    created_at: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+    },
+    updated_at: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+    },
   },
   {
     timestamps: false,
